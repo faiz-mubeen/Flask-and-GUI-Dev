@@ -1,0 +1,1 @@
+This is a project to learn Flask development and i am creating a Named Entity Recognition application using API and Flask.
