@@ -3,22 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <title>Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .sa-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: darkgoldenrod;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            height: 150px;
+            resize: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .meter {
+            height: 30px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .meter > span {
+            display: block;
+            height: 100%;
+            transition: width 0.3s;
+            border-radius: 25px;
+        }
+
+        .negative {
+            background-color: #ff4d4d;
+        }
+
+        .neutral {
+            background-color: #ffeb3b;
+        }
+
+        .positive {
+            background-color: #4caf50;
+        }
+
+        .percentage {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 0;
+            line-height: 30px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .response-container {
+            margin-top: 30px;
+        }
+
+        .response-container h4 {
+            font-size: 18px;
+            color: lightseagreen;
+            margin-bottom: 10px;
+        }
+
+        .response-container p {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
+    <div class="sa-container">
+        <h1>Sentiment Analysis</h1>
+        <form action="/perform_sa" method="post">
+            <label for="sa_text">Type your text here</label>
+            <textarea id="sa_text" name="sa_text" required></textarea>
+            <input type="submit" value="Submit">
+        </form>
 
-  <h1 style="color:darkgoldenrod"> Sentiment Analysis </h1>
-  <form action="/perform_sa" method="post">
-      <label>Type your text here</label><br>
-      <textarea name="sa_text"></textarea><br>
-      <input type="submit" value="Submit">
-  </form>
-
-  {% if response %}
-    {% for i in response['sentiment']: %}
-        <h4 style="color: lightseagreen;">Sentiments ({{ i }}):</h4>
-        <p>{{response['sentiment'][i] }}</p>
-    {% endfor %}
-  {% endif %}
-
+        <div class="response-container">
+            {% if response %}
+                {% for i in response['sentiment'] %}
+                    <h4>Sentiments ({{ i }}):</h4>
+                    <div class="meter">
+                        <span class="{{ i }}" style="width: {{ response['sentiment'][i] }}%;"></span>
+                        <div class="percentage">{{ response['sentiment'][i]*100 }}%</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>

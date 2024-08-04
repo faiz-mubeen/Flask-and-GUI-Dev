@@ -3,14 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .profile-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: #f0f2f5;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #e0e4e9;
+        }
+
+        .link-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-
-    <p>Click below to do</p><br>
-    <ul>
-        <li><a href="/ner">NER</a></li>
-        <li><a href="/sa">Sentiment Analysis</a></li>
-    </ul>
-
+    <div class="profile-container">
+        <p>Click below to do</p>
+        <ul>
+            <li>
+                <a href="/ner">
+                    <img class="link-icon" src="https://img.icons8.com/ios-filled/50/000000/artificial-intelligence.png" alt="NER Icon">
+                    NER
+                </a>
+            </li>
+            <li>
+                <a href="/sa">
+                    <img class="link-icon" src="https://img.icons8.com/ios-filled/50/000000/sentiment-analysis.png" alt="Sentiment Analysis Icon">
+                    Sentiment Analysis
+                </a>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
