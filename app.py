@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request,redirect,request,session
 from db import Database
-
+import api
 
 app = Flask(__name__)
 dbo = Database()
@@ -33,8 +33,10 @@ def perform_login():
     response = dbo.search(email,password)
 
     if response:
-        session['logged_in'] = 1
-        return redirect('/profile')
+        session = 1
+        # return redirect('/profile')
+        return render_template('profile.html')
+
     else:
         return render_template("login.html",message="galat pass/email")
     
@@ -47,19 +49,25 @@ def profile():
     
 @app.route('/ner')
 def ner():
-    if session:
-        return render_template('ner.html')
-    else:
-        return redirect('/')
+    return render_template('ner.html')
 
 @app.route('/perform_ner',methods=['post'])
 def perform_ner():
-    if session:
-        text = request.form.get('ner_text')
-        response = api.ner(text)
-        return render_template('ner.html',response=response)
+    text = request.form.get('ner_text')
+    response = api.sentiment(text)
     
-    else:
-        return redirect('/')
+    return render_template('ner.html',response=response)
+
+@app.route('/sa')
+def ner():
+    return render_template('senti.html')
+
+@app.route('/perform_sa',methods=['post'])
+def perform_ner():
+    text = request.form.get('ner_text')
+    response = api.sentiment(text)
+    
+    return render_template('ner.html',response=response)
+    
 
 app.run(debug=True)

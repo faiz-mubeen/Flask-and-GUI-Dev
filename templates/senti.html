@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis</title>
+</head>
+<body>
+
+  <h1 style="color:darkgoldenrod"> Sentiment Analysis </h1>
+  <form action="/perform_sa" method="post">
+      <label>Type your text here</label><br>
+      <textarea name="sa_text"></textarea><br>
+      <input type="submit" value="Submit">
+  </form>
+
+  {% if response %}
+    {% for i in response['entities']: %}
+        <p>{{ i['name'] + " ==> " + i['category'] }}</p>
+    {% endfor %}
+  {% endif %}
+
+</body>
+</html>
