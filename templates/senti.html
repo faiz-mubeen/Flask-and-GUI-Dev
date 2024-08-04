@@ -14,8 +14,9 @@
   </form>
 
   {% if response %}
-    {% for i in response['entities']: %}
-        <p>{{ i['name'] + " ==> " + i['category'] }}</p>
+    {% for i in response['sentiment']: %}
+        <h4 style="color: lightseagreen;">Sentiments ({{ i }}):</h4>
+        <p>{{response['sentiment'][i] }}</p>
     {% endfor %}
   {% endif %}
 

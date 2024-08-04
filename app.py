@@ -54,20 +54,20 @@ def ner():
 @app.route('/perform_ner',methods=['post'])
 def perform_ner():
     text = request.form.get('ner_text')
-    response = api.sentiment(text)
+    response = api.ner(text)
     
     return render_template('ner.html',response=response)
 
 @app.route('/sa')
-def ner():
+def sa():
     return render_template('senti.html')
 
 @app.route('/perform_sa',methods=['post'])
-def perform_ner():
-    text = request.form.get('ner_text')
+def perform_sa():
+    text = request.form.get('sa_text')
     response = api.sentiment(text)
     
-    return render_template('ner.html',response=response)
+    return render_template('senti.html',response=response)
     
 
 app.run(debug=True)
